@@ -36,14 +36,14 @@ class CreateListing extends Component {
 				      <div class="modal-body">
 				          <form onSubmit={(e) => this.props.addListing(e, this.state)}>
 					          <label>Client name:</label>
-					          <form.input type='text' name='client_name' value={this.state.client_name} onChange={this.handleChange}/>
+					          <form type='text' name='client_name' value={this.state.client_name} onChange={this.handleChange}/>
 					          <label>Client number:</label>
-					          <form.input type='text' name='client_number' value={this.state.client_number} onChange={this.handleChange}/>
+					          <form type='text' name='client_number' value={this.state.client_number} onChange={this.handleChange}/>
 					          <label>Property address:</label>
-					          <form.input type='text' name='property_address' value={this.state.property_address} onChange={this.handleChange}/>
+					          <form type='text' name='property_address' value={this.state.property_address} onChange={this.handleChange}/>
 					            <label>List price:</label>
-					          <form.input type='text' name='list_price' value={this.state.list_price} onChange={this.handleChange}/>
-					          <button type='Submit'>Create Dog</button>
+					          <form type='text' name='list_price' value={this.state.list_price} onChange={this.handleChange}/>
+					          <button type='Submit'>Create Listing</button>
 					        </form>
 				      </div>
 				      <div class="modal-footer">
@@ -57,3 +57,5 @@ class CreateListing extends Component {
 			)
 	}
 }
+
+export default CreateListing

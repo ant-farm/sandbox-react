@@ -25,4 +25,4 @@ function ListingsList(props) {
     )
 }
 
-export default DogList
+export default ListingsList

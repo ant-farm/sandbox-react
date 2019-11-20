@@ -47,6 +47,12 @@ class LoginRegisterForm extends React.Component{
 	}
 
 	handleChange = (e) => {
+		this.setState({
+			[e.target.name]: e.target.value
+		})
+	}
+
+	handleSubmit = (e) => {
 		e.preventDefault()
 		this.loginRegister()
 	}
@@ -59,11 +65,11 @@ class LoginRegisterForm extends React.Component{
             this.state.action === "register"
             ?
             <React.Fragment>
-              <Label>Email:</Label>
+              <Label>First name:</Label>
               <Form.Input 
                 type="text" 
-                name="email" 
-                value={this.state.email}
+                name="first_name" 
+                value={this.state.first_name}
                 onChange={this.handleChange}
               />
             </React.Fragment>
