@@ -65,11 +65,11 @@ class ListingsContainer extends Component {
 		}
 	};
 
-	deleteListing = async id => {
+	deleteListing = async (id) => {
 		console.log(id);
 
 		const deleteListingResponse = await fetch(
-			process.env.REACT_APP_API_URL + "/api/v1/listings" + id,
+			process.env.REACT_APP_API_URL + "/api/v1/listings/" + id,
 			{
 				method: "DELETE",
 				credentials: "include"
@@ -77,14 +77,12 @@ class ListingsContainer extends Component {
 		);
 		const deleteListingParsed = await deleteListingResponse.json();
 		console.log(deleteListingParsed);
-		this.setState({
-			listings: this.state.listings.flter(listing => listing.id !== id)
-		});
+		this.setState({listings: this.state.listings.filter((listing) => listing.id !== id)});
 	};
 
-	editListing = idofListingToEdit => {
+	editListing = (idOfListingToEdit) => {
 		const listingToEdit = this.state.listings.find(
-			listing => listing.id === idofListingToEdit
+			listing => listing.id === idOfListingToEdit
 		);
 		this.setState({
 			editModalOpen: true,
@@ -94,7 +92,7 @@ class ListingsContainer extends Component {
 		});
 	};
 
-	handleEditChange = e => {
+	handleEditChange = (e) => {
 		this.setState({
 			listingToEdit: {
 				...this.state.listingToEdit,
@@ -102,7 +100,7 @@ class ListingsContainer extends Component {
 			}
 		});
 	};
-	updateListing = async e => {
+	updateListing = async (e) => {
 		e.preventDefault();
 		try {
 			const url =
@@ -121,7 +119,7 @@ class ListingsContainer extends Component {
 			console.log("response from db after trying to update a listing");
 			console.log(updateResponseParsed);
 			const newListingArrayWithUpdate = this.state.listings.map(
-				listing => {
+				(listing) => {
 					if (listing.id === updateResponseParsed.data.id) {
 						listing = updateResponseParsed.data;
 					}
@@ -162,7 +160,12 @@ class ListingsContainer extends Component {
 						/>
 					</Grid.Column>
 					<Grid.Column>
-					<CreateListing addListing={this.addListing} />
+					
+					<CreateListing 
+								addListing={this.addListing}
+								closeModal={this.closeModal}
+								 />
+
 					</Grid.Column>
 					<EditListingModal
 						open={this.state.editModalOpen}
