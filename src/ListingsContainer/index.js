@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ListingsList from "../ListingsList";
 import CreateListing from "../CreateListingForm";
 import EditListingModal from "../EditListingModal";
+import CardExampleCard from '../ShowAgent';
 import { Grid } from "semantic-ui-react";
 
 class ListingsContainer extends Component {
@@ -57,8 +58,10 @@ class ListingsContainer extends Component {
 			console.log(parsedResponse, "this is the response");
 
 			this.setState({
-				listings: [...this.state.listings, parsedResponse.data]
+				listings: [...this.state.listings, parsedResponse.data],
+				editModalOpen: false
 			});
+
 		} catch (err) {
 			console.log(err);
 		}
@@ -108,6 +111,7 @@ class ListingsContainer extends Component {
 		console.log(this.state.listingToEdit)
 
 		const body = {
+
 			client_name: this.state.listingToEdit.client_name,
 			list_price: this.state.listingToEdit.list_price
 		}
@@ -150,6 +154,8 @@ class ListingsContainer extends Component {
 
 	render() {
 		return (
+			<div>
+			<CardExampleCard />
 			<Grid
 				columns={2}
 				divided
@@ -167,7 +173,6 @@ class ListingsContainer extends Component {
 						/>
 					</Grid.Column>
 					<Grid.Column>
-					
 					<CreateListing 
 								addListing={this.addListing}
 								closeModal={this.closeModal}
@@ -183,6 +188,7 @@ class ListingsContainer extends Component {
 					/>
 				</Grid.Row>
 			</Grid>
+			</div>
 		);
 	}
 }
