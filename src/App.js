@@ -8,8 +8,8 @@ class App extends React.Component{
   constructor(){
     super()
     this.state = {
-      loggedIn: true,
-      loggedinUserEmail: null
+      loggedIn: false,
+      loggedInUser: null
     }
   }
 
@@ -27,7 +27,7 @@ class App extends React.Component{
     if(parsedLoginResponse.status.code === 200) {
       this.setState({
         loggedIn: true,
-        loggedinUserEmail: parsedLoginResponse.data.email
+        loggedInUser: parsedLoginResponse.data
       })
     } else{
       console.log('Login Failed')
@@ -48,7 +48,7 @@ class App extends React.Component{
     if(parsedRegisterResponse.status.code === 201){
       this.setState({
         loggedIn: true,
-        loggedinUserEmail: parsedRegisterResponse.data.email
+        loggedInUser: parsedRegisterResponse.data
       })
     } else {
       console.log('Register Failed')
@@ -62,7 +62,7 @@ class App extends React.Component{
         {
           this.state.loggedIn
           ?
-          <ListingsContainer />
+          <ListingsContainer user={this.state.loggedInUser}/>
           :
           <LoginRegisterForm login={this.login} register={this.register} />
         }

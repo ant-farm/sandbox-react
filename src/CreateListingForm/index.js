@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
 	Form,
@@ -8,6 +9,7 @@ import {
 	Segment,
 	Image
 } from "semantic-ui-react";
+
 
 // class CreateListing extends React.Component {
 // 	constructor(){

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ListingsList from "../ListingsList";
 import CreateListing from "../CreateListingForm";
 import EditListingModal from "../EditListingModal";
-import CardExampleCard from '../ShowAgent';
+import ShowAgent from "../ShowAgent"
 import { Grid } from "semantic-ui-react";
 
 class ListingsContainer extends Component {
@@ -12,7 +12,6 @@ class ListingsContainer extends Component {
 			listings: [],
 			editModalOpen: false,
 			listingToEdit: {
-
 				client_name: "",
 				list_price: ""
 			}
@@ -39,6 +38,8 @@ class ListingsContainer extends Component {
 		}
 	};
 
+
+
 	addListing = async (e, listingFromForm) => {
 		e.preventDefault();
 		console.log(listingFromForm);
@@ -56,7 +57,6 @@ class ListingsContainer extends Component {
 			);
 			const parsedResponse = await createdListingResponse.json();
 			console.log(parsedResponse, "this is the response");
-
 			this.setState({
 				listings: [...this.state.listings, parsedResponse.data],
 				editModalOpen: false
@@ -66,10 +66,8 @@ class ListingsContainer extends Component {
 			console.log(err);
 		}
 	};
-
 	deleteListing = async (id) => {
 		console.log(id);
-
 		const deleteListingResponse = await fetch(
 			process.env.REACT_APP_API_URL + "/api/v1/listings/" + id,
 			{
@@ -81,22 +79,16 @@ class ListingsContainer extends Component {
 		console.log(deleteListingParsed);
 		this.setState({listings: this.state.listings.filter((listing) => listing.id !== id)});
 	};
-
 	editListing = (idOfListingToEdit) => {
 		console.log('we are in editListing() in ListingsContainer')
 		const listingToEdit = this.state.listings.find(
 			listing => listing.id === idOfListingToEdit
 		);
-
-
-
-
 		this.setState({
 			editModalOpen: true,
 			listingToEdit: listingToEdit
 		});
 	};
-
 	handleEditChange = (event) => {
 		this.setState({
 			listingToEdit: {
@@ -109,13 +101,11 @@ class ListingsContainer extends Component {
 		e.preventDefault();
 		console.log('THIS IS IT!!@O$@#$#@O$%@#%')
 		console.log(this.state.listingToEdit)
-
 		const body = {
 
 			client_name: this.state.listingToEdit.client_name,
 			list_price: this.state.listingToEdit.list_price
 		}
-
 		try {
 			const url = process.env.REACT_APP_API_URL + "/api/v1/listings/" + this.state.listingToEdit.id
 			const updateResponse = await fetch(url, {
@@ -145,13 +135,11 @@ class ListingsContainer extends Component {
 			console.log("Error: ",err);
 		}
 	};
-
 	closeModal = () => {
 		this.setState({
 			editModalOpen: false
 		});
 	};
-
 	render() {
 		return (
 			<div>
@@ -173,11 +161,17 @@ class ListingsContainer extends Component {
 						/>
 					</Grid.Column>
 					<Grid.Column>
+
+						<ShowAgent user={this.props.user}
+							
+						/>
+						
+					</Grid.Column>
+					<Grid.Column>
 					<CreateListing 
 								addListing={this.addListing}
 								closeModal={this.closeModal}
 								 />
-
 					</Grid.Column>
 					<EditListingModal
 						open={this.state.editModalOpen}
@@ -192,7 +186,4 @@ class ListingsContainer extends Component {
 		);
 	}
 }
-
-
-
 export default ListingsContainer
