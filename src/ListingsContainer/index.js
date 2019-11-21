@@ -23,7 +23,7 @@ class ListingContainer extends Component {
 	}
 	getListings = async () => {
 		try {
-			const = listings = await fetch(process.env.
+			const listings = await fetch(process.env.
 				REACT_APP_API_URL + '/api/v1/listings/', {
 					credentials: 'include'
 				});
@@ -37,7 +37,7 @@ class ListingContainer extends Component {
 			console.log(err);
 		}
 	}
-}
+
 
 addListing = async (e, listingFromForm) => {
 	e.preventDefault();
@@ -163,7 +163,7 @@ render(){
       </Grid>
     )
   }
-
+}
 
 
 
