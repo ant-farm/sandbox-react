@@ -143,7 +143,7 @@ class ListingsContainer extends Component {
 	render() {
 		return (
 			<div>
-			<CardExampleCard />
+		
 			<Grid
 				columns={2}
 				divided

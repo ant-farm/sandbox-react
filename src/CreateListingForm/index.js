@@ -84,7 +84,7 @@ class CreateListing extends React.Component {
 	close = () => this.setState({ open: false });
 
 	render() {
-		const { open } = this.state;
+		const { open, dimmer } = this.state;
 
 		return (
 			<div>
