@@ -11,8 +11,15 @@ class ListingsContainer extends Component {
 		this.state = {
 			listings: [],
 			editModalOpen: false,
+			createModalOpen: false,
 			listingToEdit: {
 				client_name: "",
+				list_price: ""
+			},
+			newListings: {
+				client_name: "",
+				client_number: "",
+				property_address: "",
 				list_price: ""
 			}
 		}
@@ -59,7 +66,7 @@ class ListingsContainer extends Component {
 			console.log(parsedResponse, "this is the response");
 			this.setState({
 				listings: [...this.state.listings, parsedResponse.data],
-				editModalOpen: false
+				createModalOpen: true
 			});
 
 		} catch (err) {
@@ -89,6 +96,7 @@ class ListingsContainer extends Component {
 			listingToEdit: listingToEdit
 		});
 	};
+
 	handleEditChange = (event) => {
 		this.setState({
 			listingToEdit: {
@@ -97,6 +105,16 @@ class ListingsContainer extends Component {
 			}
 		});
 	};
+
+	handleCreateChange = (event) => {
+		this.setState({
+			newListings: {
+				...this.state.newListings,
+				[event.target.name]: event.target.value
+			}
+		})
+	}
+
 	updateListing = async (e) => {
 		e.preventDefault();
 		console.log('THIS IS IT!!@O$@#$#@O$%@#%')
@@ -169,7 +187,10 @@ class ListingsContainer extends Component {
 					</Grid.Column>
 					<Grid.Column>
 					<CreateListing 
+					
+								open={this.state.createModalOpen}
 								addListing={this.addListing}
+								handleCreateChange={this.handleCreateChange}
 								closeModal={this.closeModal}
 								 />
 					</Grid.Column>

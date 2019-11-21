@@ -10,87 +10,12 @@ import {
 	Image
 } from "semantic-ui-react";
 
-
-// class CreateListing extends React.Component {
-// 	constructor(){
-// 		super()
-
-// 		this.state= {
-// 			client_name: '',
-// 			client_number: '',
-// 			property_address: '',
-// 			list_price: ''
-// 		}
-
-// 	}
-// 	handleChange = (e) => {
-// 		this.setState({
-// 			[e.currentTarget.name]: e.currentTarget.value
-// 		})
-// 	}
-// 		render(){
-// 		return(
-// 			   <Segment>
-// 		        <h4>Create Listing</h4>
-// 		        <Modal trigger={<Button>Show Modal</Button>}>
-// 				    <Modal.Header>Select a Photo</Modal.Header>
-// 				    <Modal.Content image>
-// 				      <Image wrapped size='medium' src='https://react.semantic-ui.com/images/avatar/large/rachel.png' />
-// 				      <Modal.Description>
-// 				        <Header>Create a listing</Header>
-// 				        <p>
-// 				         <Form onSubmit={(e) => this.props.addListing(e, this.state)}>
-// 				          <Label>Client Name:</Label>
-// 				          <Form.Input type='text' name='client_name' value={this.state.client_name} onChange={this.handleChange}/>
-// 				          <Label>Client Number:</Label>
-// 				          <Form.Input type='text' name='client_number' value={this.state.client_number} onChange={this.handleChange}/>
-// 				          <Label>Property Address:</Label>
-// 				          <Form.Input type='text' name='property_address' value={this.state.property_address} onChange={this.handleChange}/>
-// 				          <Label>List price:</Label>
-// 				          <Form.Input type='text' name='list_price' value={this.state.list_price} onChange={this.handleChange}/>
-// 				          <Button type='Submit'>Create Listing</Button>
-// 				        </Form>
-// 				        </p>
-// 				      </Modal.Description>
-// 				    </Modal.Content>
-// 				  </Modal>
-
-// 		      </Segment>
-// 			      )
-
-// 		}
-// 	}
-
-class CreateListing extends React.Component {
-	constructor() {
-		super();
-
-		this.state = {
-			client_name: "",
-			client_number: "",
-			property_address: "",
-			list_price: "",
-			open: false
-		};
-	}
-	 	handleChange = (e) => {
-		this.setState({
-			[e.currentTarget.name]: e.currentTarget.value
-		})
-	}
-	// state = { open: false }
-
-	show = dimmer => () => this.setState({ dimmer, open: true });
-	close = () => this.setState({ open: false });
-
-	render() {
-		const { open, dimmer } = this.state;
+function CreateListing(props) {
 
 		return (
-			<div>
-				<Button onClick={this.show("blurring")}>Create Listing</Button>
+				<Modal trigger={<Button open={props.open}>Create Listing</Button>}>
 
-				<Modal dimmer={dimmer} open={open} onClose={this.close}>
+				<Modal onClose={props.closeModal}>
 					<Modal.Header>Select a Photo</Modal.Header>
 					<Modal.Content image>
 						<Image
@@ -101,40 +26,37 @@ class CreateListing extends React.Component {
 						<Modal.Description>
 							<Header>New Client Information</Header>
 							<Form
-								onSubmit={e =>
-									this.props.addListing(e, this.state)
-								}
-							>
+								onSubmit={props.addListing}>
 								<Label>Client Name:</Label>
 								<Form.Input
 									type="text"
 									name="client_name"
-									value={this.state.client_name}
-									onChange={this.handleChange}
+									value={props.client_name}
+									onChange={props.handleCreateChange}
 								/>
 								<Label>Client Number:</Label>
 								<Form.Input
 									type="text"
 									name="client_number"
-									value={this.state.client_number}
-									onChange={this.handleChange}
+									value={props.client_number}
+									onChange={props.handleCreateChange}
 								/>
 								<Label>Property Address:</Label>
 								<Form.Input
 									type="text"
 									name="property_address"
-									value={this.state.property_address}
-									onChange={this.handleChange}
+									value={props.property_address}
+									onChange={props.handleCreateChange}
 								/>
 								<Label>List price:</Label>
 								<Form.Input
 									type="text"
 									name="list_price"
-									value={this.state.list_price}
-									onChange={this.handleChange}
+									value={props.list_price}
+									onChange={props.handleCreateChange}
 								/>
 								<Modal.Actions>
-									<Button color="black" onClick={this.close}>
+									<Button color="black" onClick={props.closeModal}>
 										Cancel
 									</Button>
 									<Button
@@ -148,11 +70,11 @@ class CreateListing extends React.Component {
 							</Form>
 						</Modal.Description>
 					</Modal.Content>
-					
+					</Modal>
 				</Modal>
-			</div>
 		);
 	}
-}
+
+
 
 export default CreateListing;
