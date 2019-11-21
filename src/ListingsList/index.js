@@ -7,8 +7,8 @@ function ListingsList(props) {
 				<div class='card-body'>
 					<div class='card-title'>{listing.property_address}</div>
 					<p class='card-text'>
-					{listing.client_name}
-					{listing.client_number}
+					{listing.client_name},
+					{listing.client_number},
 					{listing.list_price}
 					</p>
 				</div>
@@ -19,9 +19,9 @@ function ListingsList(props) {
 	});
 	
  return (
-      // <Card.Group>
+      	<div>
         { listings }
-      // </Card.Group>
+        </div>
     )
 }
 

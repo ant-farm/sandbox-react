@@ -72,6 +72,27 @@ class LoginRegisterForm extends React.Component{
                 value={this.state.first_name}
                 onChange={this.handleChange}
               />
+               <Label>Last name:</Label>
+              <Form.Input 
+                type="text" 
+                name="last_name" 
+                value={this.state.last_name}
+                onChange={this.handleChange}
+              />
+                <Label>Phone number:</Label>
+              <Form.Input 
+                type="text" 
+                name="phone_number" 
+                value={this.state.phone_number}
+                onChange={this.handleChange}
+              />
+                <Label>Company:</Label>
+              <Form.Input 
+                type="text" 
+                name="company" 
+                value={this.state.company}
+                onChange={this.handleChange}
+              />
             </React.Fragment>
             :
             null
