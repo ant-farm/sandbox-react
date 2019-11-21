@@ -11,12 +11,11 @@ class ListingsContainer extends Component {
 			listings: [],
 			editModalOpen: false,
 			listingToEdit: {
+
 				client_name: "",
-				client_number: "",
-				property_address: "",
 				list_price: ""
 			}
-		};
+		}
 	}
 	componentDidMount() {
 		this.getListings();
@@ -81,36 +80,44 @@ class ListingsContainer extends Component {
 	};
 
 	editListing = (idOfListingToEdit) => {
+		console.log('we are in editListing() in ListingsContainer')
 		const listingToEdit = this.state.listings.find(
 			listing => listing.id === idOfListingToEdit
 		);
+
+
+
+
 		this.setState({
 			editModalOpen: true,
-			listingToEdit: {
-				...listingToEdit
-			}
+			listingToEdit: listingToEdit
 		});
 	};
 
-	handleEditChange = (e) => {
+	handleEditChange = (event) => {
 		this.setState({
 			listingToEdit: {
 				...this.state.listingToEdit,
-				[e.target.name]: e.target.value
+				[event.target.name]: event.target.value
 			}
 		});
 	};
 	updateListing = async (e) => {
 		e.preventDefault();
+		console.log('THIS IS IT!!@O$@#$#@O$%@#%')
+		console.log(this.state.listingToEdit)
+
+		const body = {
+			client_name: this.state.listingToEdit.client_name,
+			list_price: this.state.listingToEdit.list_price
+		}
+
 		try {
-			const url =
-				process.env.REACT_APP_API_URL +
-				"/api/v1/listings/" +
-				this.state.listingToEdit.id;
+			const url = process.env.REACT_APP_API_URL + "/api/v1/listings/" + this.state.listingToEdit.id
 			const updateResponse = await fetch(url, {
 				method: "PUT",
 				credentials: "include",
-				body: JSON.stringify(this.state.listingToEdit),
+				body: JSON.stringify(body),
 				headers: {
 					"Content-Type": "application/json"
 				}
@@ -131,7 +138,7 @@ class ListingsContainer extends Component {
 			});
 			this.closeModal();
 		} catch (err) {
-			console.log(err);
+			console.log("Error: ",err);
 		}
 	};
 
