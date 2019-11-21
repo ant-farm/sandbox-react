@@ -64,7 +64,6 @@ class ListingsContainer extends Component {
 			console.log(err);
 		}
 	};
-
 	deleteListing = async (id) => {
 		console.log(id);
 
@@ -79,7 +78,6 @@ class ListingsContainer extends Component {
 		console.log(deleteListingParsed);
 		this.setState({listings: this.state.listings.filter((listing) => listing.id !== id)});
 	};
-
 	editListing = (idOfListingToEdit) => {
 		const listingToEdit = this.state.listings.find(
 			listing => listing.id === idOfListingToEdit
@@ -91,7 +89,6 @@ class ListingsContainer extends Component {
 			}
 		});
 	};
-
 	handleEditChange = (e) => {
 		this.setState({
 			listingToEdit: {
@@ -140,52 +137,6 @@ class ListingsContainer extends Component {
 			editModalOpen: false
 		});
 	};
-
-	render() {
-		return (
-			<Grid
-				columns={2}
-				divided
-				textAlign="center"
-				style={{ height: "100%" }}
-				verticalAlign="top"
-				stackable
-			>
-				<Grid.Row>
-					<Grid.Column>
-						<ListingsList
-							listings={this.state.listings}
-							deleteListing={this.deleteListing}
-							editListing={this.editListing}
-						/>
-					</Grid.Column>
-					<Grid.Column>
-					
-					<CreateListing 
-								addListing={this.addListing}
-								closeModal={this.closeModal}
-								 />
-
-					</Grid.Column>
-					<EditListingModal
-						open={this.state.editModalOpen}
-						updateListing={this.updateListing}
-						listingToEdit={this.state.listingToEdit}
-						closeModal={this.closeModal}
-						handleEditChange={this.handleEditChange}
-					/>
-				</Grid.Row>
-			</Grid>
-		);
-	}
-
-
-closeModal = () => {
-	this.setState({
-		editModalOpen: false
-	})
-}
-
 	render(){
 	    return (
 	      <Grid 

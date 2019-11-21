@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Label, Header, Modal, Segment} from 'semantic-ui-react'
+import { Form, Button, Label, Segment} from 'semantic-ui-react'
 
  
 class CreateListing extends React.Component {
