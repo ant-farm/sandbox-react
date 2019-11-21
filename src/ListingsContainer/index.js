@@ -18,8 +18,7 @@ class ListingsContainer extends Component {
 	}
 	componentDidMount() {
 		this.getListings();
-	}
-	getListings = async () => {
+		getListings = async () => {
 		try {
 			const listings = await fetch(
 				process.env.REACT_APP_API_URL + "/api/v1/listings/",
@@ -36,28 +35,6 @@ class ListingsContainer extends Component {
 			console.log(err);
 		}
 	};
-
-	// getAgent = async () => {
-	// 	try {
-	// 		const agent = await fetch(process.env.REACT_APP_API_URL + '/api/v1/agents/',
-	// 			{
-	// 				credentials: "include"
-	// 			}
-	// 		)
-	// 		const parsedAgents = await agent.json();
-	// 		console.log(parsedAgents);
-	// 		this.setState({
-	// 			agents: parsedAgents.data
-	// 		})
-	// 	}
-	// 	catch(err){
-	// 		console.log(err);
-	// 	}
-	// };
-
-
-
-
 	addListing = async (e, listingFromForm) => {
 		e.preventDefault();
 		console.log(listingFromForm);
@@ -174,10 +151,7 @@ class ListingsContainer extends Component {
 						/>
 					</Grid.Column>
 					<Grid.Column>
-						<ShowAgent user={this.props.user}
-							
-						/>
-						
+						<ShowAgent user={this.props.user}/>	
 					</Grid.Column>
 					<Grid.Column>
 					<CreateListing 

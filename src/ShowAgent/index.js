@@ -24,5 +24,4 @@ function ShowAgent(props) {
   </Card>
   )
 }
-
 export default ShowAgent
