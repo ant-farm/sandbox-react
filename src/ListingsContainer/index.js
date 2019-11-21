@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ListingsList from "../ListingsList";
 import CreateListing from "../CreateListingForm";
 import EditListingModal from "../EditListingModal";
+import ShowAgent from "../ShowAgent"
 import { Grid } from "semantic-ui-react";
 class ListingsContainer extends Component {
 	constructor(props) {
@@ -35,6 +36,28 @@ class ListingsContainer extends Component {
 			console.log(err);
 		}
 	};
+
+	// getAgent = async () => {
+	// 	try {
+	// 		const agent = await fetch(process.env.REACT_APP_API_URL + '/api/v1/agents/',
+	// 			{
+	// 				credentials: "include"
+	// 			}
+	// 		)
+	// 		const parsedAgents = await agent.json();
+	// 		console.log(parsedAgents);
+	// 		this.setState({
+	// 			agents: parsedAgents.data
+	// 		})
+	// 	}
+	// 	catch(err){
+	// 		console.log(err);
+	// 	}
+	// };
+
+
+
+
 	addListing = async (e, listingFromForm) => {
 		e.preventDefault();
 		console.log(listingFromForm);
@@ -149,6 +172,12 @@ class ListingsContainer extends Component {
 							deleteListing={this.deleteListing}
 							editListing={this.editListing}
 						/>
+					</Grid.Column>
+					<Grid.Column>
+						<ShowAgent user={this.props.user}
+							
+						/>
+						
 					</Grid.Column>
 					<Grid.Column>
 					<CreateListing 
