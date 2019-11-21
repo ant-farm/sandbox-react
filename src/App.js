@@ -66,6 +66,7 @@ class App extends React.Component{
           :
           <LoginRegisterForm login={this.login} register={this.register} />
         }
+
       </div>
     );
   }

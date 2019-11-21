@@ -10,15 +10,23 @@ class ListingsContainer extends Component {
 		this.state = {
 			listings: [],
 			editModalOpen: false,
+			createModalOpen: false,
 			listingToEdit: {
 				client_name: "",
+				list_price: ""
+			},
+			newListings: {
+				client_name: "",
+				client_number: "",
+				property_address: "",
 				list_price: ""
 			}
 		}
 	}
 	componentDidMount() {
 		this.getListings();
-		getListings = async () => {
+	}
+	getListings = async () => {
 		try {
 			const listings = await fetch(
 				process.env.REACT_APP_API_URL + "/api/v1/listings/",
@@ -53,7 +61,8 @@ class ListingsContainer extends Component {
 			const parsedResponse = await createdListingResponse.json();
 			console.log(parsedResponse, "this is the response");
 			this.setState({
-				listings: [...this.state.listings, parsedResponse.data]
+				listings: [...this.state.listings, parsedResponse.data],
+				createModalOpen: true
 			});
 		} catch (err) {
 			console.log(err);
@@ -90,6 +99,14 @@ class ListingsContainer extends Component {
 			}
 		});
 	};
+	handleCreateChange = (event) => {
+		this.setState({
+			newListings: {
+				...this.state.newListings,
+				[event.target.name]: event.target.value
+			}
+		})
+	}
 	updateListing = async (e) => {
 		e.preventDefault();
 		console.log('THIS IS IT!!@O$@#$#@O$%@#%')
@@ -129,11 +146,13 @@ class ListingsContainer extends Component {
 	};
 	closeModal = () => {
 		this.setState({
-			editModalOpen: false
+			editModalOpen: false,
+			createModalOpen: false
 		});
 	};
 	render() {
 		return (
+			<div>
 			<Grid
 				columns={2}
 				divided
@@ -151,11 +170,14 @@ class ListingsContainer extends Component {
 						/>
 					</Grid.Column>
 					<Grid.Column>
-						<ShowAgent user={this.props.user}/>	
+						<ShowAgent user={this.props.user}
+						/>
 					</Grid.Column>
 					<Grid.Column>
 					<CreateListing 
+								open={this.state.createModalOpen}
 								addListing={this.addListing}
+								handleCreateChange={this.handleCreateChange}
 								closeModal={this.closeModal}
 								 />
 					</Grid.Column>
@@ -168,6 +190,7 @@ class ListingsContainer extends Component {
 					/>
 				</Grid.Row>
 			</Grid>
+			</div>
 		);
 	}
 }
