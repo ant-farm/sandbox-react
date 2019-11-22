@@ -1,4 +1,5 @@
 import React from 'react';
+import ShowListing from "../ShowListing"
 import { Card, Button } from 'semantic-ui-react'
 
 
@@ -9,6 +10,7 @@ function ListingsList(props) {
 				<Card.Content>
 					<Card.Header>{listing.client_name}</Card.Header>
 					<Card.Description>{listing.list_price}</Card.Description>
+					<Button onClick={() => props.showListing(listing.id)}>Show More</Button>
 				</Card.Content>
 				<Card.Content extra>
 					<Button onClick={() => props.deleteListing(listing.id)}>Delete Listing</Button>
@@ -20,6 +22,7 @@ function ListingsList(props) {
  return (
       <Card.Group>
         { listings }
+        <ShowListing listingToShow={props.listingToShow}/>
       </Card.Group>
     )
 }

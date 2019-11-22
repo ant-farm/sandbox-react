@@ -14,7 +14,7 @@ function CreateListingForm(props) {
 
 		return (
 				<Modal open={props.open} closeIcon onClose={props.closeModal}>
-					<Modal.Header>Select a Photo</Modal.Header>
+					<Modal.Header>Create New Listing</Modal.Header>
 					<Modal.Content image >
 						<Image
 							wrapped
