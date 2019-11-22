@@ -15,7 +15,12 @@ class ListingsContainer extends Component {
 			editModalOpen: false,
 			createModalOpen: false,
 			showModalOpen: false,
-			listingToShow: null,
+			listingToShow: {
+				client_name: "",
+				client_number: "",
+				property_address: "",
+				list_price: ""
+			},
 			listingToEdit: {
 				client_name: "",
 				list_price: ""
@@ -125,6 +130,8 @@ class ListingsContainer extends Component {
 		const listingToShow = this.state.listings.find(
 			listing => listing.id === idOfListingToShow
 		);
+		console.log('this is the listingtoshow')
+		console.log(listingToShow)
 		this.setState({
 			showModalOpen: true,
 			listingToShow: listingToShow
@@ -178,11 +185,11 @@ class ListingsContainer extends Component {
 		});
 
 	};
-	// showModalOpen = () => {
-	// 	this.setState({
-	// 		showModalOpen: true
-	// 	})
-	// }
+	showModalOpen = () => {
+		this.setState({
+			showModalOpen: true
+		})
+	}
 	closeModal = () => {
 		this.setState({
 			editModalOpen: false,
@@ -203,17 +210,30 @@ class ListingsContainer extends Component {
 			>
 				<Grid.Row>
 					<Grid.Column>
+						<ShowAgent user={this.props.user}
+						/>
+					<Button onClick={this.createModalOpen}>Create Listing</Button>
+					</Grid.Column>
+					<Grid.Column>
 						<ListingsList
+							showModalOpen={this.state.showModalOpen}
 							listingToShow={this.state.listingToShow}
 							listings={this.state.listings}
 							showListing={this.showListing}
 							deleteListing={this.deleteListing}
 							editListing={this.editListing}
+							closeModal={this.closeModal}
 						/>
 					</Grid.Column>
+					
 					<Grid.Column>
-						<ShowAgent user={this.props.user}
-						/>
+					<ShowListing 
+				        showModalOpen={this.state.showModalOpen}
+				        listingToShow={this.state.listingToShow}
+				        showListing={this.showListing}
+				        listings={this.state.listings}
+				        closeModal={this.closeModal}
+			        />
 					</Grid.Column>
 					<Grid.Column>
 					<CreateListingForm 
@@ -232,7 +252,7 @@ class ListingsContainer extends Component {
 					/>
 				</Grid.Row>
 			</Grid>
-				<Button onClick={this.createModalOpen}>Create Listing</Button>
+			
 			</div>
 		);
 	}
