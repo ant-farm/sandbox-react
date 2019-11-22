@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Button } from 'semantic-ui-react'
+import { Card, Button, Feed } from 'semantic-ui-react'
 
 
 function ListingsList(props) {
@@ -7,8 +7,14 @@ function ListingsList(props) {
 		return (
 			<Card key={listing.id}>
 				<Card.Content>
-					<Card.Header>{listing.client_name}</Card.Header>
-					<Card.Description>{listing.list_price}</Card.Description>
+					<Feed>
+						<Feed.Label image='../img/house.png'/>
+						<Card.Header>{listing.client_name}</Card.Header>
+						<Card.Description>{listing.client_name}'s phone number</Card.Description>
+						<Card.Description>Current list price: {listing.list_price}</Card.Description>
+						<Card.Description>Property address: {listing.property_address}</Card.Description>
+						<Card.Description>On market since: {listing.days_on_market}</Card.Description>
+					</Feed>
 				</Card.Content>
 				<Card.Content extra>
 					<Button onClick={() => props.deleteListing(listing.id)}>Delete Listing</Button>

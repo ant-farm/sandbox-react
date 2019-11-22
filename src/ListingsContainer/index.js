@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ListingsList from "../ListingsList";
 import CreateListing from "../CreateListingForm";
 import EditListingModal from "../EditListingModal";
-import ShowAgent from "../ShowAgent"
+import ShowAgent from "../ShowAgent";
 import { Grid } from "semantic-ui-react";
 
 class ListingsContainer extends Component {
@@ -22,7 +22,7 @@ class ListingsContainer extends Component {
 				property_address: "",
 				list_price: ""
 			}
-		}
+		};
 	}
 	componentDidMount() {
 		this.getListings();
@@ -45,8 +45,6 @@ class ListingsContainer extends Component {
 		}
 	};
 
-
-
 	addListing = async (e, listingFromForm) => {
 		e.preventDefault();
 		console.log(listingFromForm);
@@ -68,12 +66,11 @@ class ListingsContainer extends Component {
 				listings: [...this.state.listings, parsedResponse.data],
 				createModalOpen: true
 			});
-
 		} catch (err) {
 			console.log(err);
 		}
 	};
-	deleteListing = async (id) => {
+	deleteListing = async id => {
 		console.log(id);
 		const deleteListingResponse = await fetch(
 			process.env.REACT_APP_API_URL + "/api/v1/listings/" + id,
@@ -84,10 +81,12 @@ class ListingsContainer extends Component {
 		);
 		const deleteListingParsed = await deleteListingResponse.json();
 		console.log(deleteListingParsed);
-		this.setState({listings: this.state.listings.filter((listing) => listing.id !== id)});
+		this.setState({
+			listings: this.state.listings.filter(listing => listing.id !== id)
+		});
 	};
-	editListing = (idOfListingToEdit) => {
-		console.log('we are in editListing() in ListingsContainer')
+	editListing = idOfListingToEdit => {
+		console.log("we are in editListing() in ListingsContainer");
 		const listingToEdit = this.state.listings.find(
 			listing => listing.id === idOfListingToEdit
 		);
@@ -97,7 +96,7 @@ class ListingsContainer extends Component {
 		});
 	};
 
-	handleEditChange = (event) => {
+	handleEditChange = event => {
 		this.setState({
 			listingToEdit: {
 				...this.state.listingToEdit,
@@ -106,26 +105,28 @@ class ListingsContainer extends Component {
 		});
 	};
 
-	handleCreateChange = (event) => {
+	handleCreateChange = event => {
 		this.setState({
 			newListings: {
 				...this.state.newListings,
 				[event.target.name]: event.target.value
 			}
-		})
-	}
+		});
+	};
 
-	updateListing = async (e) => {
+	updateListing = async e => {
 		e.preventDefault();
-		console.log('THIS IS IT!!@O$@#$#@O$%@#%')
-		console.log(this.state.listingToEdit)
+		console.log("THIS IS IT!!@O$@#$#@O$%@#%");
+		console.log(this.state.listingToEdit);
 		const body = {
-
 			client_name: this.state.listingToEdit.client_name,
 			list_price: this.state.listingToEdit.list_price
-		}
+		};
 		try {
-			const url = process.env.REACT_APP_API_URL + "/api/v1/listings/" + this.state.listingToEdit.id
+			const url =
+				process.env.REACT_APP_API_URL +
+				"/api/v1/listings/" +
+				this.state.listingToEdit.id;
 			const updateResponse = await fetch(url, {
 				method: "PUT",
 				credentials: "include",
@@ -138,7 +139,7 @@ class ListingsContainer extends Component {
 			console.log("response from db after trying to update a listing");
 			console.log(updateResponseParsed);
 			const newListingArrayWithUpdate = this.state.listings.map(
-				(listing) => {
+				listing => {
 					if (listing.id === updateResponseParsed.data.id) {
 						listing = updateResponseParsed.data;
 					}
@@ -150,59 +151,55 @@ class ListingsContainer extends Component {
 			});
 			this.closeModal();
 		} catch (err) {
-			console.log("Error: ",err);
+			console.log("Error: ", err);
 		}
 	};
 	closeModal = () => {
 		this.setState({
-			editModalOpen: false
+			editModalOpen: false,
+			createModalOpen: false
 		});
 	};
 	render() {
 		return (
 			<div>
-		
-			<Grid
-				columns={2}
-				divided
-				textAlign="center"
-				style={{ height: "100%" }}
-				verticalAlign="top"
-				stackable
-			>
-				<Grid.Row>
-					<Grid.Column>
-						<ListingsList
-							listings={this.state.listings}
-							deleteListing={this.deleteListing}
-							editListing={this.editListing}
-						/>
-					</Grid.Column>
-					<Grid.Column>
-
-						<ShowAgent user={this.props.user}
-							
-						/>
-						
-					</Grid.Column>
-					<Grid.Column>
-					<CreateListing 
-					
+				<Grid
+					columns={2}
+					divided
+					textAlign="center"
+					style={{ height: "100%" }}
+					verticalAlign="top"
+					stackable
+				>
+					<Grid.Row>
+						<Grid.Column>
+							<ListingsList
+								listings={this.state.listings}
+								deleteListing={this.deleteListing}
+								editListing={this.editListing}
+							/>
+						</Grid.Column>
+						<Grid.Column>
+							<ShowAgent 
+								user={this.props.user} />
+						</Grid.Column>
+						<Grid.Column>
+							<CreateListing
 								open={this.state.createModalOpen}
 								addListing={this.addListing}
 								handleCreateChange={this.handleCreateChange}
 								closeModal={this.closeModal}
-								 />
-					</Grid.Column>
-					<EditListingModal
-						open={this.state.editModalOpen}
-						updateListing={this.updateListing}
-						listingToEdit={this.state.listingToEdit}
-						closeModal={this.closeModal}
-						handleEditChange={this.handleEditChange}
-					/>
-				</Grid.Row>
-			</Grid>
+							/>
+						</Grid.Column>
+						<EditListingModal
+							open={this.state.editModalOpen}
+							updateListing={this.updateListing}
+							listingToEdit={this.state.listingToEdit}
+							closeModal={this.closeModal}
+							handleEditChange={this.handleEditChange}
+						/>
+					</Grid.Row>
+				</Grid>
 			</div>
 		);
 	}
