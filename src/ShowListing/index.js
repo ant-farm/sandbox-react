@@ -6,10 +6,10 @@ function ShowListing (props) {
 	console.log(props.listingToShow);
 	return(
 		<Modal open={props.showModalOpen} closeIcon onClose={props.closeModal}>
-		    <Header icon='archive' content='Client Information' />
+		    <Header>{props.listingToShow.client_name}'s Information</Header>
 		    <Modal.Content>
-		    			<Card.Header>{props.listingToShow.client_name}</Card.Header>
-						<Card.Description>{props.listingToShow.client_number}'s phone number</Card.Description>
+		    			
+						<Card.Description>{props.listingToShow.client_name}'s phone number {props.listingToShow.client_number}</Card.Description>
 						<Card.Description>Current list price: {props.listingToShow.list_price}</Card.Description>
 						<Card.Description>Property address: {props.listingToShow.property_address}</Card.Description>
 						<Card.Description>On market since: {props.listingToShow.days_on_market}</Card.Description>

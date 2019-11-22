@@ -56,13 +56,19 @@ class App extends React.Component{
     }
   }
 
+  logout = async(loginInfo) => {
+    this.setState({
+      loggedIn: false
+    })
+  }
+
   render(){
     return(
       <div className='App'>
         {
           this.state.loggedIn
           ?
-          <ListingsContainer user={this.state.loggedInUser}/>
+          <ListingsContainer logout={this.logout} user={this.state.loggedInUser}/>
           :
           <LoginRegisterForm login={this.login} register={this.register} />
         }

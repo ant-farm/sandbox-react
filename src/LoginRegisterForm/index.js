@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Label } from 'semantic-ui-react'
+import { Form, Button, Label, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 
 class LoginRegisterForm extends React.Component{
 	constructor(){
@@ -59,14 +59,18 @@ class LoginRegisterForm extends React.Component{
 
 	render() {
     return(
-
-
-      
       <div className="LoginRegisterForm">
-        <Form onSubmit={this.handleSubmit}>
+        <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as='h2' color='teal' textAlign='center'>
+               Log-in to your account
+            </Header>
+
+        <Form size='large' onSubmit={this.handleSubmit}>
           {
             this.state.action === "register"
             ?
+            <Segment stacked>
             <React.Fragment>
               <Label>First name:</Label>
               <Form.Input 
@@ -96,38 +100,56 @@ class LoginRegisterForm extends React.Component{
                 value={this.state.company}
                 onChange={this.handleChange}
               />
+
             </React.Fragment>
+            </Segment>
             :
             null
           }
+            
+              <Segment stacked>
+                <Form.Input 
+                fluid icon='user' 
+                iconPosition='left' 
+                placeholder='E-mail address'
+                type="email" 
+                name="email" 
+                value={this.state.email}
+                onChange={this.handleChange} 
+                />
 
-          <Label>Email:</Label>
-          <Form.Input 
-            type="email" 
-            name="email" 
-            value={this.state.email}
-            onChange={this.handleChange}
-          />
-          <Label>Password:</Label>
-          <Form.Input 
-            type="password" 
-            name="password" 
-            value={this.state.password}
-            onChange={this.handleChange}
-          />          
-          <Button type="Submit">{this.state.action === "register" ? "Register" : "Log in" }</Button>
-        </Form>
-        {
-          this.state.action === "register"
-          ?
-          <small>Already have an account? Log in <span onClick={this.switchForm}>here</span>.</small>
-          :
-          <small>Need an account? Sign up <span onClick={this.switchForm}>here</span>!</small>  
-        }
-      </div>
-    )
+                <Form.Input
+                  fluid
+                  icon='lock'
+                  iconPosition='left'
+                  placeholder='Password'
+                  type='password'
+                  name="password" 
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  />
+
+                <Button color='teal' fluid size='large' type="Submit">{this.state.action === "register" ? "Register" : "Log in" }</Button>
+                
+              </Segment>
+            </Form>
+            {
+              this.state.action === "register"
+              ?
+              <small>Already have an account? Log in <span onClick={this.switchForm}>here</span>.</small>
+              :
+              <small>Need an account? Sign up <span onClick={this.switchForm}>here</span>!</small>  
+            }
+          </Grid.Column>
+        </Grid>
+        </div>
+
+      )
   }
-
 }
+
+
+
+
 
 export default LoginRegisterForm

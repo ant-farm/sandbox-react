@@ -179,17 +179,20 @@ class ListingsContainer extends Component {
 			console.log("Error: ",err);
 		}
 	};
+
 	createModalOpen = () => {
 		this.setState({
 			createModalOpen: true
 		});
 
 	};
+
 	showModalOpen = () => {
 		this.setState({
 			showModalOpen: true
 		})
 	}
+
 	closeModal = () => {
 		this.setState({
 			editModalOpen: false,
@@ -197,6 +200,9 @@ class ListingsContainer extends Component {
 			showModalOpen: false
 		});
 	};
+
+
+
 	render() {
 		return (
 			<div>
@@ -212,6 +218,7 @@ class ListingsContainer extends Component {
 					<Grid.Column>
 						<ShowAgent user={this.props.user}
 						/>
+					<Button onClick={this.props.logout}> Logout</Button>	
 					<Button onClick={this.createModalOpen}>Create Listing</Button>
 					</Grid.Column>
 					<Grid.Column>

@@ -1,6 +1,6 @@
 import React from 'react';
 import ShowListing from "../ShowListing"
-import { Card, Button, Feed } from 'semantic-ui-react'
+import { Card, Button, Feed, Label } from 'semantic-ui-react'
 
 
 function ListingsList(props) {
@@ -12,7 +12,7 @@ function ListingsList(props) {
 				<Card.Content>
 
 					<Feed>
-						<Feed.Label> <img src='../img/house.png'/>
+						<Feed.Label> <img src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg'/>
 						</Feed.Label>
 					
 					</Feed>
