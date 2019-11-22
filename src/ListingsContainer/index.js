@@ -3,7 +3,10 @@ import ListingsList from "../ListingsList";
 import CreateListingForm from "../CreateListingForm";
 import EditListingModal from "../EditListingModal";
 import ShowAgent from "../ShowAgent"
+import ShowListing from "../ShowListing"
 import { Button, Grid } from "semantic-ui-react";
+
+
 class ListingsContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -11,6 +14,8 @@ class ListingsContainer extends Component {
 			listings: [],
 			editModalOpen: false,
 			createModalOpen: false,
+			showModalOpen: false,
+			listingToShow: null,
 			listingToEdit: {
 				client_name: "",
 				list_price: ""
@@ -114,6 +119,22 @@ class ListingsContainer extends Component {
 			}
 		})
 	}
+
+
+	showListing = async (idOfListingToShow) => {
+		const listingToShow = this.state.listings.find(
+			listing => listing.id === idOfListingToShow
+		);
+		this.setState({
+			showModalOpen: true,
+			listingToShow: listingToShow
+		})
+	}
+
+
+
+
+
 	updateListing = async (e) => {
 		e.preventDefault();
 		console.log('THIS IS IT!!@O$@#$#@O$%@#%')
@@ -152,15 +173,21 @@ class ListingsContainer extends Component {
 		}
 	};
 	createModalOpen = () => {
-		console.log("this is something in createModalOpen");
 		this.setState({
 			createModalOpen: true
 		});
+
 	};
+	// showModalOpen = () => {
+	// 	this.setState({
+	// 		showModalOpen: true
+	// 	})
+	// }
 	closeModal = () => {
 		this.setState({
 			editModalOpen: false,
-			createModalOpen: false
+			createModalOpen: false,
+			showModalOpen: false
 		});
 	};
 	render() {
@@ -177,7 +204,9 @@ class ListingsContainer extends Component {
 				<Grid.Row>
 					<Grid.Column>
 						<ListingsList
+							listingToShow={this.state.listingToShow}
 							listings={this.state.listings}
+							showListing={this.showListing}
 							deleteListing={this.deleteListing}
 							editListing={this.editListing}
 						/>
