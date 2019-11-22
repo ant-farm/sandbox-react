@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { Component } from "react";
 import {
 	Form,
 	Button,
@@ -10,14 +10,12 @@ import {
 	Image
 } from "semantic-ui-react";
 
-function CreateListing(props) {
+function CreateListingForm(props) {
 
 		return (
-				<Modal trigger={<Button open={props.open}>Create Listing</Button>}>
-
-				<Modal onClose={props.closeModal}>
+				<Modal open={props.open} closeIcon onClose={props.closeModal}>
 					<Modal.Header>Select a Photo</Modal.Header>
-					<Modal.Content image>
+					<Modal.Content image >
 						<Image
 							wrapped
 							size="medium"
@@ -71,10 +69,6 @@ function CreateListing(props) {
 						</Modal.Description>
 					</Modal.Content>
 					</Modal>
-				</Modal>
 		);
 	}
-
-
-
-export default CreateListing;
+export default CreateListingForm;

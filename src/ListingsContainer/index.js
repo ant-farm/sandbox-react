@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import ListingsList from "../ListingsList";
-import CreateListing from "../CreateListingForm";
+import CreateListingForm from "../CreateListingForm";
 import EditListingModal from "../EditListingModal";
 import ShowAgent from "../ShowAgent"
-import { Grid } from "semantic-ui-react";
+import { Button, Grid } from "semantic-ui-react";
 class ListingsContainer extends Component {
 	constructor(props) {
 		super(props);
@@ -15,7 +15,7 @@ class ListingsContainer extends Component {
 				client_name: "",
 				list_price: ""
 			},
-			newListings: {
+			newListing: {
 				client_name: "",
 				client_number: "",
 				property_address: "",
@@ -43,31 +43,44 @@ class ListingsContainer extends Component {
 			console.log(err);
 		}
 	};
-	addListing = async (e, listingFromForm) => {
+
+
+	addListing = async (e) => {
 		e.preventDefault();
-		console.log(listingFromForm);
+		console.log(this.state.newListing);
 		try {
+
+
 			const createdListingResponse = await fetch(
 				process.env.REACT_APP_API_URL + "/api/v1/listings/",
 				{
 					method: "POST",
 					credentials: "include",
-					body: JSON.stringify(listingFromForm),
+					body: JSON.stringify(this.state.newListing),
 					headers: {
 						"Content-Type": "application/json"
 					}
 				}
 			);
+
 			const parsedResponse = await createdListingResponse.json();
 			console.log(parsedResponse, "this is the response");
+
 			this.setState({
-				listings: [...this.state.listings, parsedResponse.data],
-				createModalOpen: true
+				listings: [
+				...this.state.listings, 
+				parsedResponse.data
+				]
 			});
-		} catch (err) {
+			this.closeModal();
+		} 
+		catch (err) {
 			console.log(err);
 		}
 	};
+
+
+
 	deleteListing = async (id) => {
 		console.log(id);
 		const deleteListingResponse = await fetch(
@@ -81,6 +94,8 @@ class ListingsContainer extends Component {
 		console.log(deleteListingParsed);
 		this.setState({listings: this.state.listings.filter((listing) => listing.id !== id)});
 	};
+
+
 	editListing = (idOfListingToEdit) => {
 		console.log('we are in editListing() in ListingsContainer')
 		const listingToEdit = this.state.listings.find(
@@ -92,6 +107,7 @@ class ListingsContainer extends Component {
 		});
 	};
 	handleEditChange = (event) => {
+		event.preventDefault();
 		this.setState({
 			listingToEdit: {
 				...this.state.listingToEdit,
@@ -99,14 +115,23 @@ class ListingsContainer extends Component {
 			}
 		});
 	};
+
+
+
 	handleCreateChange = (event) => {
+		event.preventDefault();
+		console.log(" we are hitting the handleCreateChange function");
 		this.setState({
-			newListings: {
-				...this.state.newListings,
+			newListing: {
+				...this.state.newListing,
 				[event.target.name]: event.target.value
 			}
 		})
 	}
+
+
+
+
 	updateListing = async (e) => {
 		e.preventDefault();
 		console.log('THIS IS IT!!@O$@#$#@O$%@#%')
@@ -144,6 +169,12 @@ class ListingsContainer extends Component {
 			console.log("Error: ",err);
 		}
 	};
+	createModalOpen = () => {
+		console.log("this is something in createModalOpen");
+		this.setState({
+			createModalOpen: true
+		});
+	};
 	closeModal = () => {
 		this.setState({
 			editModalOpen: false,
@@ -174,12 +205,13 @@ class ListingsContainer extends Component {
 						/>
 					</Grid.Column>
 					<Grid.Column>
-					<CreateListing 
-								open={this.state.createModalOpen}
-								addListing={this.addListing}
-								handleCreateChange={this.handleCreateChange}
-								closeModal={this.closeModal}
-								 />
+					<CreateListingForm 
+						// newListing={this.state.newListing}
+						open={this.state.createModalOpen}
+						addListing={this.addListing}
+						handleCreateChange={this.handleCreateChange}
+						closeModal={this.closeModal}
+					/>
 					</Grid.Column>
 					<EditListingModal
 						open={this.state.editModalOpen}
@@ -190,8 +222,13 @@ class ListingsContainer extends Component {
 					/>
 				</Grid.Row>
 			</Grid>
+				<Button onClick={this.createModalOpen}>Create Listing</Button>
+
 			</div>
 		);
 	}
 }
 export default ListingsContainer
+
+
+
