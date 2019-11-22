@@ -12,20 +12,15 @@ function ShowAgent(props) {
       <Card.Content>
         <Card.Header>{props.user.first_name}</Card.Header>
         <Card.Meta>
-          <span className="date">Joined in 2015</span>
+          <span>Joined Under Construction</span>
         </Card.Meta>
         <Card.Description>
-          Matthew is a musician living in Nashville.
+          Agent Bio Under Construction
         </Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <a>
-          <Icon name="user" />
-          22 Friends
-        </a>
       </Card.Content>
     </Card>
   );
 }
+
 
 export default ShowAgent;
