@@ -8,11 +8,11 @@ function ShowListing (props) {
 		<Modal open={props.showModalOpen} closeIcon onClose={props.closeModal}>
 		    <Header icon='archive' content='Client Information' />
 		    <Modal.Content>
-		    		<Card.Header>{props.client_name}</Card.Header>
-						<Card.Description>{props.client_number}'s phone number</Card.Description>
-						<Card.Description>Current list price: {props.list_price}</Card.Description>
-						<Card.Description>Property address: {props.property_address}</Card.Description>
-						<Card.Description>On market since: {props.days_on_market}</Card.Description>
+		    			<Card.Header>{props.listingToShow.client_name}</Card.Header>
+						<Card.Description>{props.listingToShow.client_number}'s phone number</Card.Description>
+						<Card.Description>Current list price: {props.listingToShow.list_price}</Card.Description>
+						<Card.Description>Property address: {props.listingToShow.property_address}</Card.Description>
+						<Card.Description>On market since: {props.listingToShow.days_on_market}</Card.Description>
 		    </Modal.Content>
 		    <Modal.Actions>
 
