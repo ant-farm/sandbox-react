@@ -12,7 +12,8 @@ class LoginRegisterForm extends React.Component{
 			password: '',
 			phone_number: '',
 			company_name: '',
-			action: 'login'
+			action: 'login',
+      // background: <Image src='https://images.unsplash.com/photo-1556955112-28cde3817b0a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9' />
 		}
 	}
 
@@ -57,13 +58,18 @@ class LoginRegisterForm extends React.Component{
 		this.loginRegister()
 	}
 
+
 	render() {
     return(
+      <div style={{backgroundImage: 'url("https://i1.wp.com/architecturian.co/wp-content/uploads/2019/04/21Contemporary-Home-Exterior-.jpg?fit=1200%2C798&ssl=1")'}} >
       <div className="LoginRegisterForm">
+    
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
-          <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as='h2' color='teal' textAlign='center'>
-               Log-in to your account
+          <Grid.Column style={{ maxWidth: 450 }} >
+         
+       
+            <Header as='h2' color='teal' textAlign='center' >
+               Welcome to Sandbox
             </Header>
 
         <Form size='large' onSubmit={this.handleSubmit}>
@@ -72,29 +78,29 @@ class LoginRegisterForm extends React.Component{
             ?
             <Segment stacked>
             <React.Fragment>
-              <Label>First name:</Label>
               <Form.Input 
+                placeholder='First Name'
                 type="text" 
                 name="first_name" 
                 value={this.state.first_name}
                 onChange={this.handleChange}
               />
-               <Label>Last name:</Label>
               <Form.Input 
+                placeholder='Last Name'
                 type="text" 
                 name="last_name" 
                 value={this.state.last_name}
                 onChange={this.handleChange}
               />
-                <Label>Phone number:</Label>
               <Form.Input 
+                placeholder='Phone Number'
                 type="text" 
                 name="phone_number" 
                 value={this.state.phone_number}
                 onChange={this.handleChange}
               />
-                <Label>Company:</Label>
               <Form.Input 
+                placeholder='Company'
                 type="text" 
                 name="company" 
                 value={this.state.company}
@@ -108,6 +114,7 @@ class LoginRegisterForm extends React.Component{
           }
             
               <Segment stacked>
+
                 <Form.Input 
                 fluid icon='user' 
                 iconPosition='left' 
@@ -117,6 +124,7 @@ class LoginRegisterForm extends React.Component{
                 value={this.state.email}
                 onChange={this.handleChange} 
                 />
+                
 
                 <Form.Input
                   fluid
@@ -142,8 +150,9 @@ class LoginRegisterForm extends React.Component{
             }
           </Grid.Column>
         </Grid>
+     
         </div>
-
+        </div>
       )
   }
 }

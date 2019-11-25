@@ -1,4 +1,5 @@
 import React from 'react';
+import {Image} from 'semantic-ui-react'
 import './App.css';
 import ListingsContainer from './ListingsContainer';
 import LoginRegisterForm from './LoginRegisterForm'
@@ -65,6 +66,7 @@ class App extends React.Component{
   render(){
     return(
       <div className='App'>
+        
         {
           this.state.loggedIn
           ?
