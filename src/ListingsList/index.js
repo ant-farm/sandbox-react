@@ -8,11 +8,11 @@ function ListingsList(props) {
  	console.log(props)
 	const listings = props.listings.map(listing => {
 		return (
-			<Card key={listing.id}>
+			<Card color='red' key={listing.id}>
 				<Card.Content>
 
 					<Feed>
-						<Feed.Label> <img src='https://react.semantic-ui.com/images/avatar/small/elliot.jpg'/>
+						<Feed.Label icon='user circle'> 
 						</Feed.Label>
 					
 					</Feed>

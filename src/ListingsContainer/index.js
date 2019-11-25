@@ -205,6 +205,7 @@ class ListingsContainer extends Component {
 
 	render() {
 		return (
+
 			<div>
 			<Grid
 				columns={2}

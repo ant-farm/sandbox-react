@@ -10,12 +10,13 @@ function ShowAgent(props) {
         ui={false}
       />
       <Card.Content>
-        <Card.Header>{props.user.first_name}</Card.Header>
+        <Card.Header>{props.user.first_name} {props.user.last_name}</Card.Header>
         <Card.Meta>
-          <span>Joined Under Construction</span>
+          <span>Company Name: {props.user.company_name}</span>
+          
         </Card.Meta>
         <Card.Description>
-          Agent Bio Under Construction
+          
         </Card.Description>
       </Card.Content>
     </Card>

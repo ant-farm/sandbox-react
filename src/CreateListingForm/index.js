@@ -59,10 +59,8 @@ function CreateListingForm(props) {
 										Cancel
 									</Button>
 									<Button
+										color='green'
 										type='Submit'
-										positive
-										icon="checkmark"
-										labelPosition="right"
 										content="Create Listing!"
 									/>
 							</Modal.Actions>

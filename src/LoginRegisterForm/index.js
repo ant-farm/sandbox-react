@@ -1,5 +1,7 @@
 import React from 'react'
+import '../App.css'
 import { Form, Button, Label, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+
 
 class LoginRegisterForm extends React.Component{
 	constructor(){
@@ -12,8 +14,7 @@ class LoginRegisterForm extends React.Component{
 			password: '',
 			phone_number: '',
 			company_name: '',
-			action: 'login',
-      // background: <Image src='https://images.unsplash.com/photo-1556955112-28cde3817b0a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9' />
+			action: 'login'
 		}
 	}
 
@@ -57,16 +58,18 @@ class LoginRegisterForm extends React.Component{
 		e.preventDefault()
 		this.loginRegister()
 	}
-
+  // style={{backgroundImage: 'url("https://i1.wp.com/architecturian.co/wp-content/uploads/2019/04/21Contemporary-Home-Exterior-.jpg?fit=1200%2C798&ssl=1")'}} >
 
 	render() {
     return(
-      <div style={{backgroundImage: 'url("https://i1.wp.com/architecturian.co/wp-content/uploads/2019/04/21Contemporary-Home-Exterior-.jpg?fit=1200%2C798&ssl=1")'}} >
+
+      <div className='background-image' style={{backgroundColor: 'wheat'}}> 
+  
       <div className="LoginRegisterForm">
     
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }} >
-         
+            <Segment stacked>
        
             <Header as='h2' color='teal' textAlign='center' >
                Welcome to Sandbox
@@ -76,9 +79,11 @@ class LoginRegisterForm extends React.Component{
           {
             this.state.action === "register"
             ?
-            <Segment stacked>
+            
             <React.Fragment>
               <Form.Input 
+                icon='user'
+                iconPosition='left'
                 placeholder='First Name'
                 type="text" 
                 name="first_name" 
@@ -86,6 +91,8 @@ class LoginRegisterForm extends React.Component{
                 onChange={this.handleChange}
               />
               <Form.Input 
+                icon='user'
+                iconPosition='left'
                 placeholder='Last Name'
                 type="text" 
                 name="last_name" 
@@ -93,6 +100,8 @@ class LoginRegisterForm extends React.Component{
                 onChange={this.handleChange}
               />
               <Form.Input 
+                icon='phone volume'
+                iconPosition='left'
                 placeholder='Phone Number'
                 type="text" 
                 name="phone_number" 
@@ -100,20 +109,22 @@ class LoginRegisterForm extends React.Component{
                 onChange={this.handleChange}
               />
               <Form.Input 
+                icon="warehouse icon"
+                iconPosition='left'
                 placeholder='Company'
                 type="text" 
-                name="company" 
-                value={this.state.company}
+                name="company_name" 
+                value={this.state.company_name}
                 onChange={this.handleChange}
               />
 
             </React.Fragment>
-            </Segment>
+           
             :
             null
           }
             
-              <Segment stacked>
+              
 
                 <Form.Input 
                 fluid icon='user' 
@@ -139,15 +150,16 @@ class LoginRegisterForm extends React.Component{
 
                 <Button color='teal' fluid size='large' type="Submit">{this.state.action === "register" ? "Register" : "Log in" }</Button>
                 
-              </Segment>
+           
             </Form>
             {
               this.state.action === "register"
               ?
-              <small>Already have an account? Log in <span onClick={this.switchForm}>here</span>.</small>
+              <small >Already have an account? Log in <span onClick={this.switchForm}>here</span>.</small>
               :
-              <small>Need an account? Sign up <span onClick={this.switchForm}>here</span>!</small>  
+              <small >Need an account? Sign up <span onClick={this.switchForm}>here</span>!</small>  
             }
+               </Segment>
           </Grid.Column>
         </Grid>
      
